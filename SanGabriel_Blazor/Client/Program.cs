@@ -1,3 +1,6 @@
+using Blazorise;
+using Blazorise.Icons.Material;
+using Blazorise.Material;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +20,14 @@ namespace SanGabriel_Blazor.Client
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
+
+               builder.Services
+              .AddBlazorise(options =>
+              {
+                  options.ChangeTextOnKeyPress = true;
+              })
+              .AddMaterialProviders()
+              .AddMaterialIcons();
 
             builder.Services.AddHttpClient("SanGabriel_Blazor.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
                 .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
